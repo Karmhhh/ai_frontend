@@ -10,7 +10,7 @@ import InputFileUpload from "./Components/ImportButton";
 import SendIcon from "@mui/icons-material/Send";
 import { makeStyles, styled } from "@mui/styles";
 import CustomizedTables from "./Components/Table";
-import data from "./mockup";
+import data from "./Components/mockup";
 import Fab from "@mui/material/Fab";
 import { useEffect, useState } from "react";
 const useStyles = makeStyles({
