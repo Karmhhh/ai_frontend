@@ -43,7 +43,7 @@ const rows = [
 
 export default function CustomizedTables({data}) {console.log(data)
   return (
-    <TableContainer component={Paper} sx={{maxHeight: "75vh",overflowY: 'auto' }}>
+    <TableContainer component={Paper} sx={{maxHeight: "70vh",overflowY: 'auto' }}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead >
           <TableRow>

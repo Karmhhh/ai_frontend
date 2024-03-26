@@ -3,9 +3,7 @@ import {
   TextField,
   Divider,
   Stack,
-  IconButton,
   Grid,
-  Table,
   Typography,
 } from "@mui/material";
 import InputFileUpload from "./Components/ImportButton";
@@ -13,6 +11,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { makeStyles, styled } from "@mui/styles";
 import CustomizedTables from "./Components/Table";
 import data from "./mockup";
+import Fab from "@mui/material/Fab";
 import { useEffect, useState } from "react";
 const useStyles = makeStyles({
   whiteBorder: {
@@ -36,21 +35,22 @@ function App() {
   const classes = useStyles();
   return (
     <div className="App">
-      <Grid direction={"column"} container padding={"3rem"}>
+      <Grid direction={"column"} container padding={"1rem 3rem"}>
         <Grid item>
-          <Typography component={"h6"} variant="h5">
+          <Typography component={"i"} variant="h5">
             AI Frontend Chat
           </Typography>
         </Grid>
-        <Grid item padding={"1rem 3rem"} sx={{ height: "78vh" }}>
+        <Grid item padding={"1rem 3rem"} sx={{ height: "75vh" }}>
           <CustomizedTables data={data} />
         </Grid>
 
         <Grid item>
+
           <Stack
             padding={"1rem 3rem"}
             direction={"row"}
-            spacing={3}
+            spacing={5}
             alignItems={"center"}
           >
             <WhiteTextTextField
@@ -72,10 +72,10 @@ function App() {
               variant="middle"
               flexItem
             />
+            <Fab variant="extended" color="inherit" aria-label="send">
+              <SendIcon style={{ fill: "#0f0f0f" }} />
+            </Fab>
 
-            <IconButton color="inherit">
-              <SendIcon />
-            </IconButton>
           </Stack>
         </Grid>
       </Grid>

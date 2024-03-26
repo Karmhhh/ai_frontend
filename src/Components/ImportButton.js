@@ -2,8 +2,8 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { useState } from "react";
 import { Stack, Typography } from "@mui/material";
+import Fab from "@mui/material/Fab";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -17,28 +17,36 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function InputFileUpload({file}) {
+export default function InputFileUpload({ file }) {
   const handleFileChange = (event) => {
     const uploadedFile = event.target.files[0];
     file.setFile(uploadedFile);
   };
   return (
-    <Stack direction={"column"}>
-      <Button
+    <Stack direction={"column"} alignItems={"center"}>
+      <Fab
+        size="medium"
         color="inherit"
         component="label"
         role={undefined}
         variant="outlined"
         tabIndex={-1}
-        endIcon={<CloudUploadIcon />}
+        aria-label="send"
       >
-        Upload
+        {" "}
         <VisuallyHiddenInput onChange={handleFileChange} type="file" />
-      </Button>{" "}
-      {file.file && (
-        <Typography margin={2} component={"p"} variant={"caption"}>
+        <CloudUploadIcon style={{ fill: "#0f0f0f" }} />
+      </Fab>
+
+      {file.file !== null ? (
+        <Typography margin={1} component={"p"} variant={"caption"}>
           <b>File selezionato: </b>
-          {file.file.name}
+         <i>{file.file.name}</i>  
+        </Typography>
+      ) : (
+        <Typography margin={1} component={"p"} variant={"caption"}>
+          <b>Select File. </b>
+         {" ----------- "}
         </Typography>
       )}
     </Stack>
