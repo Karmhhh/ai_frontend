@@ -28,19 +28,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(cliente, data_emissione, numero_fattura, addetto_vendite, scadenza,n_ordine,importo_imponibile,importo_imposta,importo_totale,importo_dovuto,stato_fattura,stato_pagamento) {
-  return { cliente, data_emissione, numero_fattura, addetto_vendite, scadenza,n_ordine,importo_imponibile,importo_imposta,importo_totale,importo_dovuto,stato_fattura,stato_pagamento };
-}
-
-const rows = [
-  createData('Marco Rossi', 159, 6.0, 24, 4.0159, 6.0, 24, 4.0159, 6.0, 24, 4.0, 4.0),
-  createData('Antonio Fornelli', 237, 9.0, 37, 4.3159, 6.0, 24, 4.0159, 6.0, 24, 4.0, 4.0),
-  createData('Eclair Coper', 262, 16.0, 24, 6.0159, 6.0, 24, 4.0159, 6.0, 24, 4.0, 4.0),
-  createData('Jhon Sen', 305, 3.7, 67, 4.3159, 6.0, 24, 4.0159, 6.0, 24, 4.0, 4.0),
-  createData('Ginger bread', 356, 16.0, 49, 3.9159, 6.0, 24, 4.0159, 6.0, 24, 4.0, 4.0),
-];
-
-
 export default function CustomizedTables({data}) {console.log(data)
   return (
     <TableContainer component={Paper} sx={{maxHeight: "70vh",overflowY: 'auto' }}>

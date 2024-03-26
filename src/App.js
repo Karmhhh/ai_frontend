@@ -12,7 +12,7 @@ import { makeStyles, styled } from "@mui/styles";
 import CustomizedTables from "./Components/Table";
 import data from "./Components/mockup";
 import Fab from "@mui/material/Fab";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 const useStyles = makeStyles({
   whiteBorder: {
     "& .MuiOutlinedInput-root": {
@@ -31,8 +31,9 @@ const WhiteTextTextField = styled(TextField)({
 function App() {
   const [inputText, setInputText] = useState("");
   const [file, setFile] = useState(null);
-
   const classes = useStyles();
+  console.log(inputText);
+  
   return (
     <div className="App">
       <Grid direction={"column"} container padding={"1rem 3rem"}>
