@@ -1,12 +1,15 @@
 import "./App.css";
-import { TextField, Divider, Stack, Grid, Typography } from "@mui/material";
+import { TextField, Grid, Typography } from "@mui/material";
 import InputFileUpload from "./Components/ImportButton";
 import SendIcon from "@mui/icons-material/Send";
 import { makeStyles, styled } from "@mui/styles";
 import CustomizedTables from "./Components/Table";
 import data from "./Components/mockup";
 import Fab from "@mui/material/Fab";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+const url = "http://localhost:8000/pipeline";
+
 const useStyles = makeStyles({
   whiteBorder: {
     "& .MuiOutlinedInput-root": {
@@ -25,7 +28,35 @@ const WhiteTextTextField = styled(TextField)({
 function App() {
   const [inputText, setInputText] = useState("");
   const [file, setFile] = useState(null);
+  const [dataState, setData] = useState([{}]);
+  var obj = {
+    question: inputText,
+    file: file,
+  };
   const classes = useStyles();
+
+  const handleClick = async (obj) => {
+    // Your onClick event handler logic here
+
+    console.log(obj.question);
+
+    const response = await axios
+      .get(url, {
+        params: {
+          q: obj.question,
+        },
+      })
+      .then(function (response) {
+        setData(response);
+        console.table(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+  };
 
   return (
     <Grid
@@ -38,7 +69,7 @@ function App() {
       {/* Qui in questa Grid troviamo il Titolo */}
       <Grid item xs={12} md={12} lg={12}>
         <Typography component={"i"} variant="h5">
-          AI Frontend Chat <img src="logo192.png" height={"20px"}/>
+          AI Frontend Chat <img alt="logo_" src="logo192.png" height={"20px"} />
         </Typography>
       </Grid>
 
@@ -52,7 +83,12 @@ function App() {
         padding={"0rem 1rem"}
         sx={{ height: "75vh" }}
       >
-        {data.length > 0 && <CustomizedTables data={data} />}
+        {/* {obj && (
+          <Typography component={"p"} variant={"overline"}>
+            {obj.question}
+          </Typography>
+        )} */}
+        {dataState && <CustomizedTables data={dataState} />}
       </Grid>
 
       {/* Qui in questa Grid vengono implementati gli Input */}
@@ -80,14 +116,17 @@ function App() {
           />
         </Grid>
         <Grid item xs={3} sm={2} md={2} lg={1}>
-          <InputFileUpload file={{ file, setFile }} />{" "}
-        </Grid>{" "}
+          <InputFileUpload file={{ file, setFile }} />
+        </Grid>
         <Grid item xs={12} sm={12} md={1} lg={1}>
           <Fab
             sx={{ width: "100%" }}
             variant="extended"
             color="inherit"
             aria-label="send"
+            onClick={() => {
+              handleClick(obj);
+            }}
           >
             <SendIcon style={{ fill: "#0f0f0f" }} />
           </Fab>

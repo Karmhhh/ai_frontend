@@ -2,6 +2,21 @@
 
 const data = [
   {
+    "Cliente": 1,
+    "Data Emissione": "20/02/2023",
+    "Numero Fattura": "FAT/2023/0023",
+    "Addetto vendite": "Administrator",
+    "Data scadenza": "20/02/2023",
+    "Numero Ordine": "AE1100",
+    "Importo Imponibile": 765.0,
+    "Importo Imposta": 168.3,
+    "Importo Totale": 933.3,
+    "Importo dovuto": 0.0,
+    "Stato Fattura": "Consegnato",
+    "Stato Pagamento": "Pagata"
+  }
+,  
+  {
     cliente: "Nome Cliente 0",
     data_emissione: "2024-03-28",
     numero_fattura: "001",
