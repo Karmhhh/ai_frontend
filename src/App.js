@@ -38,7 +38,7 @@ function App() {
       {/* Qui in questa Grid troviamo il Titolo */}
       <Grid item xs={12} md={12} lg={12}>
         <Typography component={"i"} variant="h5">
-          AI Frontend Chat
+          AI Frontend Chat <img src="logo192.png" height={"20px"}/>
         </Typography>
       </Grid>
 
@@ -49,7 +49,7 @@ function App() {
         md={12}
         xl={12}
         lg={12}
-        padding={"1rem 1rem"}
+        padding={"0rem 1rem"}
         sx={{ height: "75vh" }}
       >
         {data.length > 0 && <CustomizedTables data={data} />}
