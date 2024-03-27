@@ -28,7 +28,7 @@ const WhiteTextTextField = styled(TextField)({
 function App() {
   const [inputText, setInputText] = useState("");
   const [file, setFile] = useState(null);
-  const [dataState, setData] = useState([{}]);
+  const [dataState, setData] = useState([]);
   var obj = {
     question: inputText,
     file: file,
@@ -88,7 +88,7 @@ function App() {
             {obj.question}
           </Typography>
         )} */}
-        {dataState && <CustomizedTables data={dataState} />}
+        {dataState.length>0 && <CustomizedTables data={dataState} />}
       </Grid>
 
       {/* Qui in questa Grid vengono implementati gli Input */}
