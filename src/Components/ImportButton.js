@@ -24,7 +24,7 @@ export default function InputFileUpload({ file }) {
   return (
     <Stack direction={"column"} alignItems={"center"}>
       <Fab
-        size="medium"
+        size="small"
         color="inherit"
         component="label"
         role={undefined}
@@ -32,20 +32,26 @@ export default function InputFileUpload({ file }) {
         tabIndex={-1}
         aria-label="send"
       >
-        {" "}
         <VisuallyHiddenInput onChange={handleFileChange} type="file" />
         <CloudUploadIcon style={{ fill: "#0f0f0f" }} />
       </Fab>
 
       {file.file !== null ? (
-        <Typography margin={1} component={"p"} variant={"caption"}>
-          <b>File selezionato: </b>
-         <i>{file.file.name}</i>  
+        <Typography
+          sx={{ margin: "5px 0px " }}
+          component={"p"}
+          variant={"caption"}
+        >
+          <b>Selected File: </b>
+          <i>{file.file.name}</i>
         </Typography>
       ) : (
-        <Typography margin={1} component={"p"} variant={"caption"}>
+        <Typography
+          sx={{ margin: "5px 0px " }}
+          component={"p"}
+          variant={"caption"}
+        >
           <b>Select File. </b>
-         {" ----------- "}
         </Typography>
       )}
     </Stack>

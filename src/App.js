@@ -1,18 +1,12 @@
 import "./App.css";
-import {
-  TextField,
-  Divider,
-  Stack,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { TextField, Divider, Stack, Grid, Typography } from "@mui/material";
 import InputFileUpload from "./Components/ImportButton";
 import SendIcon from "@mui/icons-material/Send";
 import { makeStyles, styled } from "@mui/styles";
 import CustomizedTables from "./Components/Table";
 import data from "./Components/mockup";
 import Fab from "@mui/material/Fab";
-import {  useState } from "react";
+import { useState } from "react";
 const useStyles = makeStyles({
   whiteBorder: {
     "& .MuiOutlinedInput-root": {
@@ -32,55 +26,74 @@ function App() {
   const [inputText, setInputText] = useState("");
   const [file, setFile] = useState(null);
   const classes = useStyles();
-  console.log(inputText);
-  
+
   return (
-    <div className="App">
-      <Grid direction={"column"} container padding={"1rem 3rem"}>
-        <Grid item>
-          <Typography component={"i"} variant="h5">
-            AI Frontend Chat
-          </Typography>
-        </Grid>
-        <Grid item padding={"1rem 3rem"} sx={{ height: "75vh" }}>
-          <CustomizedTables data={data} />
-        </Grid>
+    <Grid
+      direction={"row"}
+      className="App"
+      xl={12}
+      container
+      padding={"0rem 1rem"}
+    >
+      {/* Qui in questa Grid troviamo il Titolo */}
+      <Grid item xs={12} md={12} lg={12}>
+        <Typography component={"i"} variant="h5">
+          AI Frontend Chat
+        </Typography>
+      </Grid>
 
-        <Grid item>
+      {/* Qui in questa Grid viene mostrato l'Output */}
+      <Grid
+        item
+        xs={12}
+        md={12}
+        xl={12}
+        lg={12}
+        padding={"1rem 1rem"}
+        sx={{ height: "75vh" }}
+      >
+        {data.length > 0 && <CustomizedTables data={data} />}
+      </Grid>
 
-          <Stack
-            padding={"1rem 3rem"}
-            direction={"row"}
-            spacing={5}
-            alignItems={"center"}
+      {/* Qui in questa Grid vengono implementati gli Input */}
+      <Grid
+        item
+        container
+        spacing={3}
+        xs={12}
+        lg={12}
+        md={12}
+        alignItems={"center"}
+        padding={"0 1rem"}
+      >
+        <Grid item xs={9} sm={10} md={9} lg={10}>
+          <WhiteTextTextField
+            onChange={(e) => setInputText(e.target.value)}
+            className={classes.whiteBorder}
+            fullWidth
+            placeholder="Type your question here!"
+            id="fullWidth"
+            style={{ color: "#FFFFFF" }}
+            sx={{
+              borderRadius: "10px",
+            }}
+          />
+        </Grid>
+        <Grid item xs={3} sm={2} md={2} lg={1}>
+          <InputFileUpload file={{ file, setFile }} />{" "}
+        </Grid>{" "}
+        <Grid item xs={12} sm={12} md={1} lg={1}>
+          <Fab
+            sx={{ width: "100%" }}
+            variant="extended"
+            color="inherit"
+            aria-label="send"
           >
-            <WhiteTextTextField
-              onChange={(e) => setInputText(e.target.value)}
-              className={classes.whiteBorder}
-              fullWidth
-              placeholder="Type your question here!"
-              id="fullWidth"
-              style={{ color: "#FFFFFF" }}
-              sx={{
-                borderRadius: "10px",
-              }}
-            />
-
-            <InputFileUpload file={{ file, setFile }} />
-            <Divider
-              orientation="vertical"
-              sx={{ background: "whitesmoke" }}
-              variant="middle"
-              flexItem
-            />
-            <Fab variant="extended" color="inherit" aria-label="send">
-              <SendIcon style={{ fill: "#0f0f0f" }} />
-            </Fab>
-
-          </Stack>
+            <SendIcon style={{ fill: "#0f0f0f" }} />
+          </Fab>
         </Grid>
       </Grid>
-    </div>
+    </Grid>
   );
 }
 
