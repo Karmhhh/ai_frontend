@@ -8,7 +8,7 @@ import data from "./Components/mockup";
 import Fab from "@mui/material/Fab";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const url = "http://localhost:8000/pipeline";
+const url = "http://192.168.1.21:8000/pipeline";
 
 const useStyles = makeStyles({
   whiteBorder: {
@@ -24,9 +24,9 @@ const WhiteTextTextField = styled(TextField)({
     color: "#FFFFFF", // Imposta il colore del testo su bianco
   },
 });
-
 function App() {
   const [inputText, setInputText] = useState("");
+  const [currentQuestion, setCurrentQuestion] = useState("");
   const [file, setFile] = useState(null);
   const [dataState, setData] = useState([]);
   var obj = {
@@ -35,10 +35,33 @@ function App() {
   };
   const classes = useStyles();
 
-  const handleClick = async (obj) => {
-    // Your onClick event handler logic here
+ const handleKeyDown = async(e) => {
+    if(e.key=="Enter"){
+      setCurrentQuestion(obj.question);
 
-    console.log(obj.question);
+      const response = await axios
+        .get(url, {
+          params: {
+            q: obj.question,
+          },
+        })
+        .then(function (response) {
+          setData(response.data);
+          console.table(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+      response && setInputText("");
+    }
+  };
+
+ 
+  const handleClick = async (obj) => {
+    setCurrentQuestion(obj.question);
 
     const response = await axios
       .get(url, {
@@ -47,7 +70,7 @@ function App() {
         },
       })
       .then(function (response) {
-        setData(response);
+        setData(response.data);
         console.table(response);
       })
       .catch(function (error) {
@@ -56,6 +79,7 @@ function App() {
       .finally(function () {
         // always executed
       });
+    response && setInputText("");
   };
 
   return (
@@ -83,12 +107,14 @@ function App() {
         padding={"0rem 1rem"}
         sx={{ height: "75vh" }}
       >
-        {/* {obj && (
-          <Typography component={"p"} variant={"overline"}>
-            {obj.question}
-          </Typography>
-        )} */}
-        {dataState.length>0 && <CustomizedTables data={dataState} />}
+        {currentQuestion && dataState.length > 0 && (
+          <>
+            <Typography component={"p"} variant={"overline"}>
+              {obj.question}
+            </Typography>
+            <CustomizedTables data={dataState} />
+          </>
+        )}
       </Grid>
 
       {/* Qui in questa Grid vengono implementati gli Input */}
@@ -105,6 +131,8 @@ function App() {
         <Grid item xs={9} sm={10} md={9} lg={10}>
           <WhiteTextTextField
             onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
+            value={inputText}
             className={classes.whiteBorder}
             fullWidth
             placeholder="Type your question here!"

@@ -110,7 +110,7 @@ export default function CustomizedTables({ data }) {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <StyledTableRow key={row.cliente}>
+            <StyledTableRow key={row.numero_fattura}>
               <StyledTableCell component="th" scope="row">
                 {row.cliente}
               </StyledTableCell>
@@ -123,8 +123,8 @@ export default function CustomizedTables({ data }) {
               <StyledTableCell align="right">
                 {row.addetto_vendite}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.scadenza}</StyledTableCell>
-              <StyledTableCell align="right">{row.n_ordine}</StyledTableCell>
+              <StyledTableCell align="right">{row.data_scadenza}</StyledTableCell>
+              <StyledTableCell align="right">{row.numero_ordine}</StyledTableCell>
               <StyledTableCell align="right">
                 {row.importo_imponibile}
               </StyledTableCell>
